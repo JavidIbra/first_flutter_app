@@ -1,7 +1,18 @@
+import 'package:first_flutter_app/porstcard.dart';
 import 'package:flutter/material.dart';
 
-class SeconPage extends StatelessWidget {
-  const SeconPage({super.key});
+class SecondPage extends StatelessWidget {
+  const SecondPage(
+      {super.key,
+      required this.backgroundPic,
+      required this.nameSurname,
+      required this.profilePic,
+      required this.userName});
+
+  final String nameSurname;
+  final String userName;
+  final String profilePic;
+  final String backgroundPic;
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +32,9 @@ class SeconPage extends StatelessWidget {
               ),
               Container(
                 height: 200,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: NetworkImage(
-                          "https://cdn.pixabay.com/photo/2017/06/14/08/20/map-of-the-world-2401458_1280.jpg"),
-                      fit: BoxFit.fill),
+                      image: NetworkImage(backgroundPic), fit: BoxFit.fill),
                 ),
               ),
               Positioned(
@@ -35,31 +44,31 @@ class SeconPage extends StatelessWidget {
                   height: 100,
                   width: 100,
                   decoration: BoxDecoration(
-                    image: const DecorationImage(
-                        image: NetworkImage(
-                            "https://cdn.pixabay.com/photo/2021/06/20/20/31/woman-6351965_1280.jpg"),
-                        fit: BoxFit.fill),
+                    image: DecorationImage(
+                      image: NetworkImage(profilePic),
+                      fit: BoxFit.fill,
+                    ),
                     borderRadius: BorderRadius.circular(60),
                     color: Colors.teal,
                   ),
                 ),
               ),
-              const Positioned(
+              Positioned(
                 top: 200,
                 left: 145,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Salam",
-                      style: TextStyle(
+                      nameSurname,
+                      style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.black),
                     ),
                     Text(
-                      "Salam",
-                      style: TextStyle(
+                      userName,
+                      style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                           color: Colors.grey),
@@ -100,7 +109,7 @@ class SeconPage extends StatelessWidget {
               ),
               IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.pop(context, "ok");
                   },
                   icon: const Icon(
                     Icons.arrow_back,
@@ -115,13 +124,23 @@ class SeconPage extends StatelessWidget {
             height: 90,
             color: Colors.grey.withOpacity(0.1),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 saygac("Follower", "20k"),
                 saygac("Follow", "500"),
                 saygac("Sharing", "75"),
               ],
             ),
-          )
+          ),
+          const PostCard(
+            profilePicUrl:
+                "https://cdn.pixabay.com/photo/2016/11/21/12/54/man-1845259_1280.jpg",
+            nameSurname: "Akif",
+            time: "1 il öncə",
+            sharedPicUrl:
+                "https://cdn.pixabay.com/photo/2024/04/22/17/03/ai-generated-8713076_1280.png",
+            description: "Nolufdur?",
+          ),
         ],
       ),
     );

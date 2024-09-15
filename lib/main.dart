@@ -79,18 +79,37 @@ class _HomePageState extends State<HomePage> {
               scrollDirection: Axis.horizontal,
               // padding: EdgeInsets.all(3),
               children: [
-                createProfileCard("Leyla",
-                    "https://cdn.pixabay.com/photo/2016/11/22/21/42/woman-1850703_1280.jpg"),
-                createProfileCard("Akif",
-                    "https://media.istockphoto.com/id/1496805665/photo/thoughtful-business-man-wearing-glasses-at-the-office.jpg?s=2048x2048&w=is&k=20&c=HKdydaYr97_UFuPQstg0jlIfiIMu0cfpo0gosKRUePg="),
-                createProfileCard("Asif",
-                    "https://media.istockphoto.com/id/1316604492/photo/profile-portrait-of-middle-aged-man-over-grey-background.jpg?s=2048x2048&w=is&k=20&c=GuCZwVwvbNxy7BtIJTGA9YZKZ9dhyTrHSpDbMzWGKr8="),
-                createProfileCard("Davud",
-                    "https://cdn.pixabay.com/photo/2016/11/21/14/53/man-1845814_1280.jpg"),
-                createProfileCard("Ilqar",
-                    "https://cdn.pixabay.com/photo/2021/08/11/11/15/man-6538205_1280.jpg"),
-                createProfileCard("Nazim",
-                    "https://media.istockphoto.com/id/1592210966/photo/happy-black-man-running-in-park-with-music-smile-and-mockup-in-nature-garden-and-workout.jpg?s=2048x2048&w=is&k=20&c=ep7D80ngjTb8fELBVaB9qQ5mnIPXQwIJMXEX8vsJQiw="),
+                createProfileCard(
+                    "Leyla",
+                    "https://cdn.pixabay.com/photo/2016/11/22/21/42/woman-1850703_1280.jpg",
+                    "Leyla Babayeva",
+                    "https://cdn.pixabay.com/photo/2022/11/30/20/43/mouse-7627700_1280.jpg"),
+                createProfileCard(
+                    "Akif",
+                    "https://media.istockphoto.com/id/1496805665/photo/thoughtful-business-man-wearing-glasses-at-the-office.jpg?s=2048x2048&w=is&k=20&c=HKdydaYr97_UFuPQstg0jlIfiIMu0cfpo0gosKRUePg=",
+                    "Akif Isayev",
+                    "https://cdn.pixabay.com/photo/2023/01/05/22/12/ai-generated-7699924_1280.png"),
+                createProfileCard(
+                    "Asif",
+                    "https://media.istockphoto.com/id/1316604492/photo/profile-portrait-of-middle-aged-man-over-grey-background.jpg?s=2048x2048&w=is&k=20&c=GuCZwVwvbNxy7BtIJTGA9YZKZ9dhyTrHSpDbMzWGKr8=",
+                    "Asif Haqverdiyev",
+                    "https://cdn.pixabay.com/photo/2024/04/24/18/32/ai-generated-8718302_1280.png"),
+                createProfileCard(
+                    "Davud",
+                    "https://cdn.pixabay.com/photo/2016/11/21/14/53/man-1845814_1280.jpg",
+                    "Davud Ismayilov",
+                    "https://cdn.pixabay.com/photo/2024/04/04/03/08/ai-generated-8674235_1280.png"),
+                createProfileCard(
+                    "Ilqar",
+                    "https://cdn.pixabay.com/photo/2021/08/11/11/15/man-6538205_1280.jpg",
+                    "Ilqar Abdullayev",
+                    "https://cdn.pixabay.com/photo/2021/01/29/08/08/dog-5960092_1280.jpg"),
+                createProfileCard(
+                  "Nazim",
+                  "https://media.istockphoto.com/id/1592210966/photo/happy-black-man-running-in-park-with-music-smile-and-mockup-in-nature-garden-and-workout.jpg?s=2048x2048&w=is&k=20&c=ep7D80ngjTb8fELBVaB9qQ5mnIPXQwIJMXEX8vsJQiw=",
+                  "Nazim Xudiyev",
+                  "https://cdn.pixabay.com/photo/2019/11/15/05/23/dog-4627679_1280.png",
+                ),
               ],
             ),
           ),
@@ -129,16 +148,23 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget createProfileCard(String userName, String link) {
+  Widget createProfileCard(
+      String userName, String link, String nameSurname, String backgroundPic) {
     return Material(
       child: InkWell(
-        onTap: () {
-          Navigator.push(
+        onTap: () async {
+          Future<dynamic> backValue = Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (BuildContext context) => const SeconPage(),
+              builder: (BuildContext context) => SecondPage(
+                profilePic: link,
+                userName: userName,
+                backgroundPic: backgroundPic,
+                nameSurname: nameSurname,
+              ),
             ),
           );
+          debugPrint(await backValue);
         },
         child: Padding(
           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
