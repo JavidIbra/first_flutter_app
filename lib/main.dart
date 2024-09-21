@@ -53,7 +53,19 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         actions: [
           IconButton.filled(
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return Column(
+                      children: [
+                        _notifications("follows u", "3 minute before"),
+                        _notifications("follows u", "3 minute before"),
+                        _notifications("follows u", "3 minute before"),
+                      ],
+                    );
+                  });
+            },
             color: Colors.purple[300],
             icon: const Icon(
               Icons.notifications,
@@ -145,6 +157,30 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.purple[300],
+        child: const Icon(
+          Icons.add_a_photo,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+
+  Padding _notifications(String message, String time) {
+    return Padding(
+      padding: const EdgeInsets.all(25),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            message,
+            style: const TextStyle(fontSize: 15),
+          ),
+          Text(time)
+        ],
+      ),
     );
   }
 
@@ -153,8 +189,7 @@ class _HomePageState extends State<HomePage> {
     return Material(
       child: InkWell(
         onTap: () async {
-          Future<dynamic> backValue = Navigator.push(
-            context,
+          bool backValue = await Navigator.of(context).push(
             MaterialPageRoute(
               builder: (BuildContext context) => SecondPage(
                 profilePic: link,
@@ -164,7 +199,9 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           );
-          debugPrint(await backValue);
+          if (backValue) {
+            print("ok");
+          }
         },
         child: Padding(
           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
@@ -173,16 +210,19 @@ class _HomePageState extends State<HomePage> {
               Stack(
                 alignment: Alignment.topRight,
                 children: [
-                  Container(
-                    width: 70.0,
-                    height: 70.0,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(width: 2.0, color: Colors.grey),
-                      borderRadius: BorderRadius.circular(35),
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(link),
+                  Hero(
+                    tag: userName,
+                    child: Container(
+                      width: 70.0,
+                      height: 70.0,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(width: 2.0, color: Colors.grey),
+                        borderRadius: BorderRadius.circular(35),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(link),
+                        ),
                       ),
                     ),
                   ),

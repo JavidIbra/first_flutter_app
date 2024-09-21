@@ -40,16 +40,19 @@ class SecondPage extends StatelessWidget {
               Positioned(
                 left: 20.0,
                 bottom: 5,
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(profilePic),
-                      fit: BoxFit.fill,
+                child: Hero(
+                  tag: userName,
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(profilePic),
+                        fit: BoxFit.fill,
+                      ),
+                      borderRadius: BorderRadius.circular(60),
+                      color: Colors.teal,
                     ),
-                    borderRadius: BorderRadius.circular(60),
-                    color: Colors.teal,
                   ),
                 ),
               ),
@@ -109,7 +112,7 @@ class SecondPage extends StatelessWidget {
               ),
               IconButton(
                   onPressed: () {
-                    Navigator.pop(context, "ok");
+                    Navigator.pop(context, bool);
                   },
                   icon: const Icon(
                     Icons.arrow_back,
